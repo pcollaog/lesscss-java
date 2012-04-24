@@ -17,12 +17,10 @@ package integration;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.Before;
-
 import org.lesscss.LessCompiler;
 
 public abstract class AbstractCompileIT {
@@ -51,7 +49,7 @@ public abstract class AbstractCompileIT {
 		return file;
 	}
 
-	protected URL toURL(String filename) throws MalformedURLException {
+	protected URL toURL(String filename) {
 		return AbstractCompileIT.class.getClassLoader().getResource(filename);
 	}
 }

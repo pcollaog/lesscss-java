@@ -19,25 +19,29 @@ package org.lesscss;
  * 
  * @author Marcel Overdijk
  */
-@SuppressWarnings("serial")
 public class LessException extends Exception {
 
-    /**
-     * Constructs a new <code>LessException</code>.
-     * 
-     * @param cause The cause.
-     */
-    public LessException(Throwable cause) {
-        super(cause);
-    }
+	private static final long serialVersionUID = 8175593880232773296L;
 
-    /**
-     * Constructs a new <code>LessException</code>.
-     * 
-     * @param message The message.
-     * @param cause The cause.
-     */
-    public LessException(String message, Throwable cause) {
-        super(message, cause);
-    }
+	/**
+	 * Constructs a new <code>LessException</code>.
+	 * 
+	 * @param cause
+	 *            The cause.
+	 */
+	public LessException(Throwable cause) {
+		super(cause);
+	}
+
+	/**
+	 * Constructs a new <code>LessException</code>.
+	 * 
+	 * @param message
+	 *            The message.
+	 * @param cause
+	 *            The cause.
+	 */
+	public LessException(String message, Throwable cause) {
+		super(message, cause);
+	}
 }

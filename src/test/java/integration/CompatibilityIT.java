@@ -15,12 +15,14 @@
 package integration;
 
 import java.util.Arrays;
+
 import org.junit.Before;
 import org.junit.Test;
 
 public class CompatibilityIT extends AbstractCompileIT {
 
-    @Before
+    @Override
+	@Before
     public void setUp() throws Exception {
         super.setUp();
         lessCompiler.setCustomJs(Arrays.asList(

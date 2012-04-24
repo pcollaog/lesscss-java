@@ -19,10 +19,12 @@ import org.junit.Test;
 
 public class BootstrapIT extends AbstractCompileIT {
 
+	@Override
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
-		// set explicit less version if latest version of less gets incompatible with bootstrap
+		// set explicit less version if latest version of less gets incompatible
+		// with bootstrap
 		// lessCompiler.setLessJs(Bootstrap201IT.class.getClassLoader().getResource("bootstrap/less-1.3.0.js"));
 	}
 
@@ -50,11 +52,14 @@ public class BootstrapIT extends AbstractCompileIT {
 		testCompile(filename, filename);
 	}
 
-	private void testCompile(String lessFilename, String cssFilename) throws Exception {
+	private void testCompile(String lessFilename, String cssFilename)
+			throws Exception {
 		testCompile(lessFilename, cssFilename, false);
 	}
 
-	private void testCompile(String lessFilename, String cssFilename, boolean compress) throws Exception {
-		testCompile(toFile("bootstrap/less/" + lessFilename + ".less"), toFile("bootstrap/css/" + cssFilename + ".css"), compress);
+	private void testCompile(String lessFilename, String cssFilename,
+			boolean compress) throws Exception {
+		testCompile(toFile("bootstrap/less/" + lessFilename + ".less"),
+				toFile("bootstrap/css/" + cssFilename + ".css"), compress);
 	}
 }
