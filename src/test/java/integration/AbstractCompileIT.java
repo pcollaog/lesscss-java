@@ -23,6 +23,10 @@ import org.apache.commons.io.FileUtils;
 import org.junit.Before;
 import org.lesscss.LessCompiler;
 
+/**
+ * <p>
+ * </p>
+ */
 public abstract class AbstractCompileIT {
 
 	protected LessCompiler lessCompiler;
@@ -33,10 +37,11 @@ public abstract class AbstractCompileIT {
 	}
 
 	protected void testCompile(File lessFile, File cssFile) throws Exception {
-		testCompile(lessFile, cssFile, false);
+		testCompile(lessFile, cssFile, Boolean.FALSE);
 	}
 
-	protected void testCompile(File lessFile, File cssFile, boolean compress) throws Exception {
+	protected void testCompile(File lessFile, File cssFile, Boolean compress)
+			throws Exception {
 		lessCompiler.setCompress(compress);
 		String expected = FileUtils.readFileToString(cssFile);
 		String actual = lessCompiler.compile(lessFile);
