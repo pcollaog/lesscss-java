@@ -49,6 +49,11 @@ import org.mozilla.javascript.tools.shell.Global;
  * 
  * <pre>
  * 
+ * 
+ * 
+ * 
+ * 
+ * 
  * LessCompiler lessCompiler = new LessCompiler();
  * 
  * String css = lessCompiler
@@ -62,6 +67,26 @@ import org.mozilla.javascript.tools.shell.Global;
  */
 public class LessCompiler {
 
+	/**
+	 * 
+	 */
+	private static final String RESULT = "result";
+
+	/**
+	 * 
+	 */
+	private static final String INPUT = "input";
+
+	/**
+	 * 
+	 */
+	private static final String LESS_JS = "less.js";
+
+	/**
+	 * 
+	 */
+	private static final String ENV_RHINO_JS = "env.rhino.js";
+
 	private static final String COMPILE_STRING = "var result; var parser = new(less.Parser); parser.parse(input, function (e, tree) { if (e instanceof Object) { throw e } result = tree.toCSS({compress: %b}) });";
 
 	private static Log logger = LogFactory.getLog(LessCompiler.class);
@@ -74,7 +99,7 @@ public class LessCompiler {
 
 	private List<URL> _customJs = Collections.emptyList();
 
-	private boolean _compress = false;
+	private Boolean _compress = Boolean.FALSE;
 
 	private String _encoding = null;
 
@@ -165,7 +190,7 @@ public class LessCompiler {
 	 * 
 	 * @return Whether the compiler will compress the CSS.
 	 */
-	public boolean isCompress() {
+	public Boolean isCompress() {
 		return _compress;
 	}
 
@@ -175,7 +200,7 @@ public class LessCompiler {
 	 * @param compress
 	 *            If <code>true</code>, sets the compiler to compress the CSS.
 	 */
-	public void setCompress(boolean compress) {
+	public void setCompress(Boolean compress) {
 		_compress = compress;
 	}
 
@@ -223,10 +248,10 @@ public class LessCompiler {
 
 		try {
 			_context.evaluateReader(_scope, new InputStreamReader(_envJs
-					.openConnection().getInputStream()), "env.rhino.js", 1,
-					null);
+					.openConnection().getInputStream()), ENV_RHINO_JS, 1, null);
+
 			_context.evaluateReader(_scope, new InputStreamReader(_lessJs
-					.openConnection().getInputStream()), "less.js", 1, null);
+					.openConnection().getInputStream()), LESS_JS, 1, null);
 
 			for (URL url : _customJs) {
 				_context.evaluateReader(_scope, new InputStreamReader(url
@@ -260,13 +285,14 @@ public class LessCompiler {
 		long start = System.currentTimeMillis();
 
 		try {
-			_scope.put("input", _scope, input);
-			_scope.put("result", _scope, "");
+			_scope.put(INPUT, _scope, input);
+			_scope.put(RESULT, _scope, "");
 
 			_context.evaluateString(_scope,
 					String.format(COMPILE_STRING, _compress), "compile.js", 1,
 					null);
-			Object result = _scope.get("result", _scope);
+
+			Object result = _scope.get(RESULT, _scope);
 
 			if (logger.isDebugEnabled()) {
 				logger.debug("Finished compilation of LESS source in "

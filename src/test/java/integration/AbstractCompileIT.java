@@ -37,10 +37,10 @@ public abstract class AbstractCompileIT {
 	}
 
 	protected void testCompile(File lessFile, File cssFile) throws Exception {
-		testCompile(lessFile, cssFile, false);
+		testCompile(lessFile, cssFile, Boolean.FALSE);
 	}
 
-	protected void testCompile(File lessFile, File cssFile, boolean compress)
+	protected void testCompile(File lessFile, File cssFile, Boolean compress)
 			throws Exception {
 		lessCompiler.setCompress(compress);
 		String expected = FileUtils.readFileToString(cssFile);

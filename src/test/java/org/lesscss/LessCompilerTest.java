@@ -680,7 +680,7 @@ public class LessCompilerTest {
 	public void testCompress() throws Exception {
 		FieldUtils.writeField(lessCompiler, CONTEXT_FIELD, cx, true);
 		FieldUtils.writeField(lessCompiler, "_scope", scope, true);
-		lessCompiler.setCompress(true);
+		lessCompiler.setCompress(Boolean.TRUE);
 
 		when(scope.get("result", scope)).thenReturn(css);
 
